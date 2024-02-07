@@ -25,8 +25,8 @@ public class ViewFactory {
         return dashboardView;
     }
 
-    public void showLoginWindow() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/login.fxml"));
+    public void showLoginWindow() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
         createStage(loader);
     }
 
@@ -43,6 +43,7 @@ public class ViewFactory {
             scene = new Scene(loader.load());
         }
         catch (Exception e){
+            System.out.println("Error: createStage");
             throw new RuntimeException(e);
         }
         Stage stage = new Stage();

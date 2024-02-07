@@ -51,4 +51,8 @@ public class ViewFactory {
         stage.setTitle("Maze Bank");
         stage.show();
     }
+
+    public void closeStage(Stage stage){
+        stage.close();
+    }
 }

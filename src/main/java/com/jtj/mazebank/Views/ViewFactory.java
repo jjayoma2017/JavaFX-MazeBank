@@ -22,6 +22,7 @@ public class ViewFactory {
     // Admin Views
     private  final  ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
     private AnchorPane createClientView;
+    private AnchorPane clientsView;
 
     public ViewFactory(){
         this.loginAccountType = AccountType.CLIENT;
@@ -95,6 +96,18 @@ public class ViewFactory {
     public ObjectProperty<AdminMenuOptions> getAdminSelectedMenuItem(){
         return adminSelectedMenuItem;
     }
+
+    public AnchorPane getClientsView() {
+        if (clientsView == null) {
+            try {
+                clientsView = new FXMLLoader(getClass().getResource("/Fxml/Admin/Clients.fxml")).load();
+            }
+            catch (Exception e){
+                throw new RuntimeException(e);
+            }
+        }
+        return clientsView;
+    }
     public AnchorPane getCreateClientView() {
         if(createClientView==null){
             try {
@@ -136,6 +149,7 @@ public class ViewFactory {
     public void closeStage(Stage stage){
         stage.close();
     }
+
 
 
 }

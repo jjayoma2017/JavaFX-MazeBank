@@ -1,6 +1,7 @@
 .main_menu_container{
     -fx-background-color: #EEEEEE;
     -fx-alignment: center;
+    -fx-padding: 0 10 0 10;
 }
 
 .left_container{
@@ -37,7 +38,7 @@
     -fx-pref-height: 40;
     -fx-background-color: #FFFFFF;
     -fx-text-fill: #132A13;
-    -fx-font-size: 1.1em;
+    -fx-font-size: 1.0em;
     -fx-alignment: center-left;
     -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);
 }

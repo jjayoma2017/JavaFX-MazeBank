@@ -24,7 +24,6 @@ public class Transaction {
         return sender;
     }
 
-
     public StringProperty receiverProperty() {
         return receiver;
     }

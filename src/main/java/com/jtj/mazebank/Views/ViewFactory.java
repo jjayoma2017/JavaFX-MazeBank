@@ -157,7 +157,7 @@ public class ViewFactory {
         }
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/fb.svg"))));
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/icon.png"))));
 
         stage.setResizable(false);
         stage.setTitle("Maze Bank");

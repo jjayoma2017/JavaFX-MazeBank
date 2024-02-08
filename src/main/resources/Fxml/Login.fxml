@@ -10,6 +10,7 @@
 <?import javafx.scene.text.Text?>
 
 
+<?import javafx.scene.control.PasswordField?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="login_container" stylesheets="@../Styles/login.css"
             xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.jtj.mazebank.Controllers.LoginController">
@@ -25,7 +26,7 @@
       <Label fx:id="payee_address_lbl" text="Payee Address"/>
       <TextField fx:id="payee_address_fld" styleClass="input_field"/>
       <Label fx:id="password_lbl" text="Password"/>
-      <TextField fx:id="password_fld" styleClass="input_field"/>
+      <PasswordField fx:id="password_fld" styleClass="input_field"/>
       <Button fx:id="login_btn" mnemonicParsing="false" text="Login"/>
       <Label fx:id="error_lbl" styleClass="error_lbl" />
    </VBox>

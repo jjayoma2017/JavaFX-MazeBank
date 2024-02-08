@@ -4,23 +4,25 @@ import com.jtj.mazebank.Views.AccountType;
 import com.jtj.mazebank.Views.ViewFactory;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class Model {
     private  static Model model;
     private final ViewFactory viewFactory;
     private final  DatabaseDriver databaseDriver;
-    private AccountType loginAccountType = AccountType.CLIENT;
     // Client Data Section
     private  Client client;
     private  boolean clientLoginSuccessFlag;
     // Admin Data Section
+    private  boolean adminLoginSuccessFlag;
 
     private Model(){
         this.viewFactory = new ViewFactory(); // Singleton
         this.databaseDriver = new DatabaseDriver();
         // Client Section
         this.clientLoginSuccessFlag = false;
+        this.adminLoginSuccessFlag = false;
         this.client = new Client("","","",null,null,null);
         // Admin Section
     }
@@ -40,13 +42,6 @@ public class Model {
         return databaseDriver;
     }
 
-    public AccountType getLoginAccountType() {
-        return loginAccountType;
-    }
-
-    public void setLoginAccountType(AccountType loginAccountType) {
-        this.loginAccountType = loginAccountType;
-    }
 
     /*
      * Client Method Section
@@ -84,5 +79,27 @@ public class Model {
         }
     }
 
+
+    /*
+     * Admin Method Section
+     * */
+    public boolean getAdminLoginSuccessFlag() {
+        return adminLoginSuccessFlag;
+    }
+
+    public void setAdminLoginSuccessFlag(boolean adminLoginSuccessFlag) {
+        this.adminLoginSuccessFlag = adminLoginSuccessFlag;
+    }
+
+    public  void evaluateAdminCred(String username, String password){
+        ResultSet resultSet = databaseDriver.getAdminData(username,password);
+        try {
+            if(resultSet.isBeforeFirst()){
+                this.adminLoginSuccessFlag = true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

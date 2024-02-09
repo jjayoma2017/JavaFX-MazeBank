@@ -1,6 +1,7 @@
 package com.jtj.mazebank.Controllers.Client;
 
 import com.jtj.mazebank.Models.Model;
+import com.jtj.mazebank.Views.TransactionCellFactory;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -28,6 +29,10 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         bindData();
+        initLatestTransactionsList();
+        initAllTransactionsList();
+        transaction_listview.setItems(Model.getInstance().getLatestTransactions());
+        transaction_listview.setCellFactory(e-> new TransactionCellFactory());
     }
 
     private void  bindData(){
@@ -37,5 +42,17 @@ public class DashboardController implements Initializable {
         checking_acc_num.textProperty().bind(Model.getInstance().getClient().checkingAccountProperty().get().accountNumberProperty());
         savings_bal.textProperty().bind(Model.getInstance().getClient().savingsAccountProperty().get().balanceProperty().asString());
         savings_acc_num.textProperty().bind(Model.getInstance().getClient().savingsAccountProperty().get().accountNumberProperty());
+    }
+
+    private  void initLatestTransactionsList(){
+        if(Model.getInstance().getLatestTransactions().isEmpty()){
+            Model.getInstance().setLatestTransactions();
+        }
+    }
+
+    private  void initAllTransactionsList(){
+        if(Model.getInstance().getAllTransactions().isEmpty()){
+            Model.getInstance().setAllTransactions();
+        }
     }
 }

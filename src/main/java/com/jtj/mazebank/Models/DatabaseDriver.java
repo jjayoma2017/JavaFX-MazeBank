@@ -22,6 +22,10 @@ public class DatabaseDriver {
         return queryRecords("Select * FROM Clients where PayeeAddress='" + pAddress +"' AND  Password='" +password + "' ");
     }
 
+    public ResultSet getTransactions(String pAddress, int limit){
+        return queryRecords("Select * FROM transactions where Sender='" + pAddress +"' OR  Receiver='" +pAddress + "' LIMIT '" + limit + "' ");
+    }
+
     /*
     * Admin Section
     * */

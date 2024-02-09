@@ -14,7 +14,7 @@
       <HBox alignment="CENTER" prefHeight="60.0" prefWidth="820.0" styleClass="search_box">
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Search By Payee Address:" />
          <TextField fx:id="pAddress_fld" />
-         <Button fx:id="search_btn" mnemonicParsing="false" text="Button">
+         <Button fx:id="search_btn" mnemonicParsing="false" text="Search">
             <graphic>
                <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="20" />
             </graphic>

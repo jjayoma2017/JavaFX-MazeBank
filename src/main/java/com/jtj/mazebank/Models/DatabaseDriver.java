@@ -78,7 +78,7 @@ public class DatabaseDriver {
         try{
             statement = this.conn.createStatement();
             statement.executeUpdate("INSERT INTO " +
-                    "SavingsAccounts (Owner, AccountNumber, WithdrwalLimit, Balance) " +
+                    "SavingsAccounts (Owner, AccountNumber, WithdrawalLimit, Balance) " +
                     "VALUES ('" + owner + "' , '" + number + "', '" + wLimit + "','" + balance + "')");
         }
         catch (SQLException e){
@@ -89,4 +89,18 @@ public class DatabaseDriver {
     /*
     * Utility Methods
     * */
+    public int getLastClientsId(){
+        Statement statement;
+        ResultSet resultSet = null;
+        int  id=0;
+        try{
+            statement = this.conn.createStatement();
+            resultSet = statement.executeQuery("Select * FROM sqlite_sequence where name='Clients';");
+            id = resultSet.getInt("seq");
+        }
+        catch (SQLException e){
+            throw  new RuntimeException(e);
+        }
+        return  id;
+    }
 }

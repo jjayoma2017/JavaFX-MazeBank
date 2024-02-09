@@ -4,6 +4,7 @@ import com.jtj.mazebank.Models.Model;
 import com.jtj.mazebank.Views.ClientMenuOptions;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,6 +26,7 @@ public class ClientMenuController implements Initializable {
         dashboard_btn.setOnAction(e-> onDashboard());
         transaction_btn.setOnAction(e-> onTransaction());
         accounts_btn.setOnAction(e->onAccounts());
+        logout_btn.setOnAction(e->onLogout());
     }
 
     private void onAccounts() {
@@ -37,5 +39,16 @@ public class ClientMenuController implements Initializable {
 
     private void onDashboard() {
         Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.DASHBOARD);
+    }
+
+    private void onLogout(){
+        // get Stage
+        Stage stage = (Stage) dashboard_btn.getScene().getWindow();
+        // Close the client window
+        Model.getInstance().getViewFactory().closeStage(stage);
+        // Show Login Window
+        Model.getInstance().getViewFactory().showLoginWindow();
+        // Set login success back to false
+        Model.getInstance().setClientLoginSuccessFlag(false);
     }
 }

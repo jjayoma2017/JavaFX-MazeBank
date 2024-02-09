@@ -87,6 +87,36 @@ public class DatabaseDriver {
         executeUpdate("Update SavingsAccounts SET Balance='" + amount + "' WHERE Owner = '" + pAddress + "'  ");
     }
 
+    // Method returns savings account balance
+    public double getSavingsAccountBalance(String pAddress) throws SQLException {
+        ResultSet resultSet = queryRecords("Select * from SavingsAccounts where owner='" +pAddress+ "'; ");
+        return resultSet.getDouble("Balance");
+    }
+
+    // Method to either add or subtract from balance
+    public void updateBalance(String pAddress, double amount, String operation) throws SQLException {
+        ResultSet resultSet = queryRecords("Select * from SavingsAccounts where owner='" +pAddress+ "'; ");
+        double newBalance;
+        if(operation.equals("ADD")){
+            newBalance = resultSet.getDouble("Balance") + amount;
+            executeUpdate("Update SavingsAccounts SET Balance='" + newBalance + "' WHERE Owner = '" + pAddress + "'  ");
+        }
+        else {
+            if(resultSet.getDouble("Balance") >= amount){
+                newBalance = resultSet.getDouble("Balance") - amount;
+                executeUpdate("Update SavingsAccounts SET Balance='" + newBalance + "' WHERE Owner = '" + pAddress + "'  ");
+            }
+        }
+    }
+
+    // Creates and records new transaction
+    public void newTransaction(String sender, String receiver, double amount, String message){
+        LocalDate date = LocalDate.now();
+        executeUpdate("INSERT INTO " +
+                "Transactions (Sender, Receiver, Amount, Date, Message) " +
+                "VALUES ('" + sender + "' , '" + receiver + "', '" + amount + "','" + date + "','" + message + "')");
+    }
+
     public ResultSet queryRecords(String queryStr){
         Statement statement = null;
         ResultSet resultSet = null;
